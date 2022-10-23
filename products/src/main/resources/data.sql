@@ -1,0 +1,3 @@
+INSERT INTO PRODUCT_CATEGORY (id, name) VALUES (1, 'Painting');
+INSERT INTO PRODUCT_CATEGORY (id, name) VALUES (2, 'Sculptor');
+INSERT INTO PRODUCT_CATEGORY (id, name) VALUES (3, 'Ornaments');

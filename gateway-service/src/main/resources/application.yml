@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+server:
+  port: 8600
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+zuul:
+  ignoredServices: '*'
+  routes:
+    buyer:
+      path: /e-auction/api/v1/buyer/**
+      serviceId: sales
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+    seller:
+      path: /e-auction/api/v1/seller/**
+      serviceId: products
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+    products:
+      path: /e-auction/api/v1/products/**
+      serviceId: products
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+    auth-service:
+      path: /oauth/**
+      serviceId: auth-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+    users:
+      path: /users/**
+      serviceId: auth-service
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
