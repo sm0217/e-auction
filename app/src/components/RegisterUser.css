@@ -1,0 +1,31 @@
+.registerUser {
+    width: 100%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    top: "100 px";
+    height: "calc(99vh - 100px)";
+    border: 10pt;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 20px;
+    /* padding-left: 150px;
+    padding-right: 150px; */
+    font-size: larger;
+}
+
+.registerUserForm {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+.registerUserButton {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+

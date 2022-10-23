@@ -1,0 +1,31 @@
+.addProduct {
+    width: 100%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    top: "100 px";
+    height: "calc(99vh - 100px)";
+    border: 10pt;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 20px;
+    font-size: larger;
+}
+
+.addProductForm {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 270px;
+    padding-right: 270px;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+.addProductButton {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+

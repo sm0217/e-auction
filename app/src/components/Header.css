@@ -1,0 +1,56 @@
+.Header {
+    position: fixed;
+    top: 0; /* Stick it to the top */
+    max-height: 70px;
+    width: 100vw;
+  
+    display: grid;
+    grid-template-areas: "logo nav";
+  
+    /* Cosmetics */
+    background-color: #282c34;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    overflow: "auto"
+  }
+
+  .titleC {
+    color: #fff;
+  }
+
+  .Logo {
+    grid-area: logo;
+    height: 70px;
+  }
+  
+  .Nav {
+    display: grid;
+    grid-area: nav;
+    grid-template-columns: repeat(4, auto);
+    align-items: center;
+    justify-items: center;
+  }
+  .Nav a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.5s;
+    text-decoration: none;
+  }
+  .Nav a:hover {
+    transform: scale(1.1);
+  }
+
+  .Nav button {
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 5px 0px 0px rgba(255, 0, 0, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 70ms;
+  }
+  

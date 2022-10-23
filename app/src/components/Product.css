@@ -1,0 +1,33 @@
+.table {
+    text-align-last: center;
+    font-size: larger;
+    color: rgb(6, 2, 2);
+}
+
+.productList {
+    border: 2px solid rgb(11, 103, 11);
+    margin: 2pt;
+    font-size: calc(5px + 2vmin);
+    color: rgb(6, 2, 2);
+}
+
+.link {
+    font-size: x-large;
+    color: #a029dc;
+}
+
+.pList {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+    top: "100 px";
+    height: "calc(99vh - 100px)";
+    border: 10pt;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* padding-left: 150px;
+    padding-right: 150px; */
+}

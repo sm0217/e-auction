@@ -1,0 +1,110 @@
+import React from 'react';
+
+export default class Product extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null,
+            isLoaded: false,
+            selectedItem: null,
+            items: []
+        };
+        this.displayProduct = this.displayProduct.bind(this);
+    }
+
+    componentDidMount() {
+        fetch("http://localhost:8600/e-auction/api/v1/products")
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    this.setState({
+                        isLoaded: true,
+                        items: result
+                    });
+                },
+                // Note: it's important to handle errors here
+                // instead of a catch() block so that we don't swallow
+                // exceptions from actual bugs in components.
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
+    render() {
+        const { error, isLoaded, items, selectedItem } = this.state;
+        if (error) {
+            return <div>Error: {error.message}</div>;
+        } else if (!isLoaded) {
+            return <div>Loading...</div>;
+        } else {
+            return (
+                <div>
+                    <select onChange={this.displayProduct} className="productList">
+                        <option value="Select a product"> -- Select a product -- </option>
+                        {items.map((item) => <option value={item.id}>{item.name}</option>)}
+                    </select>
+                    {selectedItem}
+                    <table>
+                        <tr>
+                            <th>Product name</th>
+                            <th>Short description</th>
+                            <th>Detailed description</th>
+                            <th>Category</th>
+                            <th>Starting price</th>
+                            <th>Bid end date</th>
+                        </tr>
+                        {items.map((item) => {
+                            return (
+                                <tr key={item.id}>
+                                    <td>{item.name}</td>
+                                    <td>{item.shortDescription}</td>
+                                    <td>{item.detailedDescription}</td>
+                                    <td>{item.category}</td>
+                                    <td>{item.startingPrice}</td>
+                                    <td>{item.bidEndDate}</td>
+                                </tr>
+                            );
+                        })}
+                    </table>
+                </div>
+            );
+        }
+    }
+
+    displayProduct = (event) => {
+        const { items } = this.state;
+
+    console.log(items)
+    console.log(event.target.value);
+       let item = items.filter(i => i.id == event.target.value)[0];
+       console.log(item)
+        let x = 
+            <div>
+                <table>
+                    <tr>
+                        <th>Product name</th>
+                        <th>Short description</th>
+                        <th>Detailed description</th>
+                        <th>Category</th>
+                        <th>Starting price</th>
+                        <th>Bid end date</th>
+                    </tr>
+                    <tr key={item.id}>
+                        <td>{item.name}</td>
+                        <td>{item.shortDescription}</td>
+                        <td>{item.detailedDescription}</td>
+                        <td>{item.category}</td>
+                        <td>{item.startingPrice}</td>
+                        <td>{item.bidEndDate}</td>
+                    </tr>
+                </table>
+            </div>;
+       this.setState({
+        selectedItem: x
+       });
+    }
+}

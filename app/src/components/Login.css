@@ -1,0 +1,16 @@
+.login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    font-size: calc(5px + 2vmin);
+    color: rgb(6, 2, 2);
+    padding-top: 100px
+}
+
+.submitButton {
+    align-items: center;
+    margin: 20px;
+    font-size: calc(5px + 2vmin);
+    color: rgb(6, 2, 2);
+}
