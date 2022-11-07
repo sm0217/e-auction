@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "sales")
+@FeignClient(name = "sales-service")
 public interface BuyersClient {
 
   @GetMapping("/e-auction/api/v1/buyer/bids/{productId}")

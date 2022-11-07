@@ -1,12 +1,23 @@
+buildscript {
+	dependencies {
+		classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.7.1'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'com.palantir.docker' version '0.33.0'
 }
 
 group = 'com.auction'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '1.0.0'
+
+def javaVersion = JavaVersion.VERSION_11
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
 
 configurations {
 	compileOnly {
@@ -29,13 +40,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.cloud:spring-cloud-starter-config'
-	implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 	implementation 'org.springframework.cloud:spring-cloud-starter-feign:1.4.7.RELEASE'
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'net.logstash.logback:logstash-logback-encoder:7.2'
+	testImplementation 'ch.qos.logback:logback-classic:1.4.4'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
-	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -47,4 +60,17 @@ dependencyManagement {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task unpack(type: Copy) {
+	dependsOn bootJar
+	from(zipTree(tasks.bootJar.outputs.files.singleFile))
+	into("build/dependency")
+}
+
+docker {
+	println 'A message which is logged at QUIET level'
+	name "${project.group}/${bootJar.baseName}"
+	copySpec.from(tasks.unpack.outputs).into("dependency")
+	buildArgs(['DEPENDENCY': "dependency"])
 }

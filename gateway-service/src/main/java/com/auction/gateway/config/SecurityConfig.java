@@ -27,7 +27,7 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
   @Bean
   public RemoteTokenServices remoteTokenService() {
     RemoteTokenServices tokenService = new RemoteTokenServices();
-    tokenService.setCheckTokenEndpointUrl("http://localhost:8086/oauth/check_token");
+    tokenService.setCheckTokenEndpointUrl("http://auth-service:8086/oauth/check_token");
     tokenService.setClientId("oauthclient1");
     tokenService.setClientSecret("oauthsecret1");
     return tokenService;

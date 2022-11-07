@@ -1,6 +1,6 @@
 spring:
   application:
-    name: sales
+    name: sales-service
   datasource:
     url: jdbc:h2:mem:mydb
     username: sa
@@ -17,11 +17,15 @@ spring:
   cloud:
     config:
       enabled: false
-    consul:
-      discovery:
-        healthCheckPath: /e-auction/api/v1/actuator/health
 server:
-  port: 8085
+  port: 8087
   servlet:
     context-path: /e-auction/api/v1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+spring.cloud.consul.enabled: false
 
