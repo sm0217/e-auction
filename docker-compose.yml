@@ -1,0 +1,43 @@
+services:
+  eureka-server:
+    build: ./eureka/
+    ports:
+      - "8761:8761"
+  products:
+    build: ./products/
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+    ports:
+      - "8081:8081"
+    depends_on:
+      - "eureka-server"
+  sales-service:
+    build: ./sales/
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+    ports:
+      - "8087:8087"
+    depends_on:
+      - "eureka-server"
+  gateway-service:
+    build: ./gateway-service/
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+    ports:
+      - "8600:8600"
+    depends_on:
+      - "eureka-server"
+  auth-service:
+    build: ./auth-service/
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eureka-server:8761/eureka"
+    ports:
+      - "8086:8086"
+    depends_on:
+      - "eureka-server"
+  e-auction-app:
+    container_name: app-dev
+    image: app-dev
+    build: ./app/
+    ports:
+      - 3000:3000
