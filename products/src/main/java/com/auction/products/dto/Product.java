@@ -39,7 +39,7 @@ public class Product {
   private Float startingPrice;
 
   @Future(message = "Bid end date must be in the future")
-  @JsonFormat(pattern = "yyyy/MM/dd")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date bidEndDate;
 
   @Valid

@@ -17,7 +17,7 @@ logging:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://3.95.25.148:8761/eureka
 
 zuul:
   ignoredServices: '*'
@@ -34,6 +34,11 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
     products:
       path: /e-auction/api/v1/products/**
+      serviceId: products
+      stripPrefix: false
+      sensitiveHeaders: Cookie,Set-Cookie
+    test123:
+      path: /e-auction/api/v1/test123**
       serviceId: products
       stripPrefix: false
       sensitiveHeaders: Cookie,Set-Cookie

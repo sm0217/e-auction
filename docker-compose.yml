@@ -35,9 +35,9 @@ services:
       - "8086:8086"
     depends_on:
       - "eureka-server"
-  e-auction-app:
-    container_name: app-dev
-    image: app-dev
-    build: ./app/
-    ports:
-      - 3000:3000
+#  e-auction-app:
+#    container_name: app-dev
+#    image: app-dev
+#    build: ./app/
+#    ports:
+#      - 3000:3000

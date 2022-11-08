@@ -8,6 +8,16 @@
     padding-top: 100px
 }
 
+
+.mb-3 {
+    padding-bottom: 20px
+}
+
+.login-form {
+    padding-top: 100px;
+    /* padding-left: 75px; */
+}
+
 .submitButton {
     align-items: center;
     margin: 20px;

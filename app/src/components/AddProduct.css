@@ -12,6 +12,7 @@
     flex-wrap: wrap;
     margin: 20px;
     font-size: larger;
+    /* padding-left: 200px; */
 }
 
 .addProductForm {
@@ -26,6 +27,12 @@
 .addProductButton {
     padding-top: 5px;
     padding-bottom: 5px;
+    /* padding-left: 200px */
 }
 
-
+.form-select {
+    width: -webkit-fill-available;
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 34px;
+}

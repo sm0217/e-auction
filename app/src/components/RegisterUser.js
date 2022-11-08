@@ -34,37 +34,29 @@ const RegisterUserForm = () => {
                 if (!response.ok) {
                     // get error message from body or default to response status
                     response.json().then(res => {
-                        setErrorsD(res.errors.map(err => err.defaultMessage));
+                        console.log(res)
+                        setErrorsD(res.errors);
+
                     });
                 } else {
                     navigate('/')
                 }
             });
-
-        setFormData({
-            emailAddress: '',
-            firstName: '',
-            surname: '',
-            address: '',
-            city: '',
-            state: '',
-            pin: '',
-            phoneNumber: '',
-            role: '',
-            password: ''
-        })
-
-        
     }
 
 
     return (
         <Container className='registerUser'>
+            <h2 className='registerUserForm'>Register</h2>
+
             <Form onSubmit={handleRegisterUser}>
-            {errorsD ? errorsD.map(err => <h5 style={{ color: 'red' }}>{err}</h5>) : ""}
-                <Form.Group controlId="formName" className='registerUserForm'>
-                    <Form.Label column="lg">Email Address</Form.Label>
-                    <Form.Control onChange={e => setFormData({ ...formData, emailAddress: e.target.value })} type="text" placeholder="Enter email address" />
+                <Form.Group className='registerUserForm' controlId="formBasicEmail" >
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" onChange={e => setFormData({ ...formData, emailAddress: e.target.value })} />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword" className="registerUserForm">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={e => setFormData({ ...formData, password: e.target.value })} />
                 </Form.Group>
                 <Form.Group controlId="formName" className='registerUserForm'>
                     <Form.Label column="lg">First Name</Form.Label>
@@ -94,16 +86,17 @@ const RegisterUserForm = () => {
                     <Form.Label column="lg">Phone number</Form.Label>
                     <Form.Control onChange={e => setFormData({ ...formData, phoneNumber: e.target.value })} type="text" placeholder="Enter Phone number" />
                 </Form.Group>
-                <Form.Group controlId="formBasicPassword" className='registerUserForm'>
-                    <Form.Label column="lg">Password</Form.Label>
-                    <Form.Control type="password" onChange={e => setFormData({ ...formData, password: e.target.value })} type="text" placeholder="Enter Password" />
-                </Form.Group>
-                <h4>Role</h4>
-                <div onChange={e => setFormData({ ...formData, role: e.target.value })}>
-                    <input type="radio" value="SELLER" name="role" /> Seller
-                    <input type="radio" value="BUYER" name="role" /> Buyer
+                <Form.Label className='registerUserForm'>Role</Form.Label>
+                {/* <input type="radio" value="SELLER" name="role" /> Seller
+                    <input type="radio" value="BUYER" name="role" /> Buyer */}
+                <div className='registerUserForm' onChange={e => setFormData({ ...formData, role: e.target.value })}>
+                    <input type="radio" id="SELLER" name="SELLER" value="SELLER" />
+                    <label for="SELLER" style={{ paddingRight: '5px' }}>SELLER</label>
+                    <input type="radio" id="BUYER" name="BUYER" value="BUYER" />
+                    <label for="BUYER">BUYER</label>
                 </div>
-                <div className='addProductButton'>
+                {errorsD ? errorsD.map(err => <h5 className='registerUserForm' style={{ color: 'red' }}>{err}</h5>) : ""}
+                <div className='registerUserButton'>
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>

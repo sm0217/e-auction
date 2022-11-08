@@ -1,5 +1,6 @@
 package com.auction.sales.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,7 +14,9 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.Getter;
 
+@Getter
 public class Product {
 
   private long id;
@@ -32,6 +35,7 @@ public class Product {
   private Float startingPrice;
 
   @Future(message = "Bid end date must be in the future")
+  @JsonFormat(pattern = "dd/MM/yyyy")
   private Date bidEndDate;
 
 }

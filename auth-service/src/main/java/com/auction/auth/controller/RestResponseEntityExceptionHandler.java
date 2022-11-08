@@ -1,4 +1,4 @@
-package com.auction.products.exception;
+package com.auction.auth.controller;
 
 import static java.util.Collections.singletonList;
 
@@ -49,7 +49,7 @@ public class RestResponseEntityExceptionHandler {
     return new ResponseEntity<>(
         new ErrorResponse(
             LocalDateTime.now(),
-            ex.getFieldErrors().stream()
+            ex.getBindingResult().getFieldErrors().stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.toList())),
         HttpStatus.BAD_REQUEST);

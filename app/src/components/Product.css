@@ -2,6 +2,7 @@
     text-align-last: center;
     font-size: larger;
     color: rgb(6, 2, 2);
+    overflow-wrap: "break-word";
 }
 
 .productList {

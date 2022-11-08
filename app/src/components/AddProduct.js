@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const AddProductForm = () => {
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("user"));
+    const [errorsD, setErrorsD] = useState();
     const [formData, setFormData] = useState({
         name: '',
         shortDescription: "",
@@ -33,21 +34,30 @@ const AddProductForm = () => {
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         })
-            .then(data => data.json());
-        setFormData({
-            name: '',
-            description: "",
-            image: "",
-            category_id: 0,
-            meal_ingredients: [],
-            id: null
-        })
-
-        navigate('/')
+            .then(response => {
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    response.json().then(res => {
+                        console.log(res)
+                        setErrorsD(res.errors);
+                    });
+                } else {
+                    navigate('/')
+                }
+            });
+        // setFormData({
+        //     name: '',
+        //     description: "",
+        //     image: "",
+        //     category_id: 0,
+        //     meal_ingredients: [],
+        //     id: null
+        // })
     }
 
     return (
         <Container className='addProduct'>
+             {errorsD ? errorsD.map(err => <h5 style={{ color: 'red' }}>{err}</h5>) : ""}
             <Form onSubmit={handleAddProduct}>
                 <Form.Group controlId="formName" className='addProductForm'>
                     <Form.Label column="lg">Product name</Form.Label>
@@ -63,7 +73,13 @@ const AddProductForm = () => {
                 </Form.Group>
                 <Form.Group controlId="formName" className='addProductForm'>
                     <Form.Label column="lg">Category</Form.Label>
-                    <Form.Control onChange={e => setFormData({ ...formData, category: e.target.value })} type="text" placeholder="Enter catrgory" />
+                    <br></br>
+                    <Form.Select class = "addSelect" aria-label="Default select example" onChange={e => setFormData({ ...formData, category: e.target.value })}>
+                        <option>Select a product</option>
+                        <option value="Painting">Painting</option>
+                        <option value="Sculptor">Sculptor</option>
+                        <option value="Ornaments">Ornaments</option>
+                    </Form.Select>
                 </Form.Group>
                 <Form.Group controlId="formName" className='addProductForm'>
                     <Form.Label column="lg">Starting Price</Form.Label>

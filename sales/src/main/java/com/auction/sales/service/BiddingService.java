@@ -6,12 +6,14 @@ import com.auction.sales.dto.Product;
 import com.auction.sales.repository.BidRepository;
 import java.util.Collections;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+@Slf4j
 public class BiddingService {
 
   @Autowired
@@ -21,7 +23,11 @@ public class BiddingService {
   private ProductClient productClient;
 
   public Bid placeBid(Bid bid) {
-    getProduct(bid.getProductId());
+    Product product = getProduct(bid.getProductId());
+    if (bid.getBidAmount() > product.getStartingPrice()) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+          "Bid amount greater than starting price");
+    }
     return bidRepository.save(bid);
   }
 
@@ -29,6 +35,7 @@ public class BiddingService {
     try {
       return productClient.findById(productId);
     } catch (Exception exception) {
+      log.error("Error getting product", exception);
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product id invalid");
     }
   }

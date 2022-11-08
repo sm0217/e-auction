@@ -97,6 +97,7 @@ export default class Product extends React.Component {
     }
 
     render() {
+        let role = JSON.parse(localStorage.getItem("user")).role;
         const { error, isLoaded, items, selectedItem, bidsLoaded, bids, edit, product, deleteError } = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
@@ -108,7 +109,7 @@ export default class Product extends React.Component {
                     <div>
                         <h1>
                             Products{' '}
-                            <a className='link' href="/add-product">Add Product</a>
+                            {role == "SELLER" ? <a className='link' href="/add-product">Add Product</a> : ""}
                         </h1>
                     </div>
                     <select onChange={this.handleChange} className="productList">

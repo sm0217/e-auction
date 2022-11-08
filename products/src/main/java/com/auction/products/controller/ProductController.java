@@ -38,6 +38,14 @@ public class ProductController {
         .body(products);
   }
 
+  @GetMapping("/test123")
+  public ResponseEntity<Product> getAll() {
+    return ResponseEntity.status(HttpStatus.OK)
+        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+        .body(new Product());
+  }
+
+
   @GetMapping("/products/{id}")
   public ResponseEntity<Product> findById(@PathVariable Long id) {
     Product product = productService.getProductById(id);
