@@ -1,0 +1,54 @@
+{
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "inferenceAccelerators": [],
+    "containerDefinitions": [
+        {
+            "name": "auth-service",
+            "image": "auth-service:6.0.0",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "8086",
+                    "protocol": "tcp"
+                }
+                
+            ]
+        },
+        {
+            "name": "gateway-service",
+            "image": "gateway-service:6.0.0",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "8600",
+                    "protocol": "tcp"
+                }
+                
+            ]
+        },
+        {
+            "name": "products",
+            "image": "products:6.0.0",
+            "resourceRequirements": null,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": "8081",
+                    "protocol": "tcp"
+                }
+                
+            ]
+        }
+    ],
+    "volumes": [],
+    "networkMode": "awsvpc",
+    "memory": "512",
+    "cpu": "256",
+    "executionRoleArn": "arn:aws:iam::150017049858:role/ecs-devops-role",
+    "taskRoleArn": "",
+    "placementConstraints": []
+}
